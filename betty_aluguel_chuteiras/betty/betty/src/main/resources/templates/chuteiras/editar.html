@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Aluguel de Chuteira</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f8fafc; color: #1e293b; }
+        .card { background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); max-width: 450px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
+        button { margin-top: 16px; padding: 10px 16px; background-color: #2563eb; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        a { margin-left: 12px; color: #64748b; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Editar Aluguel de Chuteira</h1>
+
+    <div class="card">
+        <form th:action="@{/chuteiras/atualizar/{id}(id=${chuteira.getId()})}" method="post">
+            <label>Modelo da Chuteira:</label>
+            <input type="text" name="modelo" th:value="${chuteira.getModelo()}" required>
+
+            <label>Tamanho:</label>
+            <input type="text" name="tamanho" th:value="${chuteira.getTamanho()}" required>
+
+            <label>Nome do Cliente:</label>
+            <input type="text" name="cliente" th:value="${chuteira.getCliente()}" required>
+
+            <label>Valor:</label>
+            <input type="text" name="valor_diaria" th:value="${chuteira.getValor_diaria()}" required>
+
+            <label>Status:</label>
+            <select name="status">
+                <option value="Alugada" th:selected="${chuteira.getStatus() == 'Alugada'}">Alugada</option>
+                <option value="Devolvida" th:selected="${chuteira.getStatus() == 'Devolvida'}">Devolvida</option>
+                <option value="Disponível" th:selected="${chuteira.getStatus() == 'Disponível'}">Disponível</option>
+            </select>
+
+            <button type="submit">Salvar Alterações</button>
+            <a href="/chuteiras/index">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>
